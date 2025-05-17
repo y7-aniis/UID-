@@ -1,0 +1,155 @@
+
+:root {
+  --deep-green: #0d2f30;
+  --black: #000000;
+  --pink: #e1c3c8;
+  --mint: #8cc8ba;
+  --grey: #cdc9c9;
+  --bg-dark: #5b5460;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-dark);
+  color: white;
+}
+/* Font */
+.logo {
+  font-family: 'Heiti SC', sans-serif;
+}
+body, p, h1, h2, h3, nav, footer {
+  font-family: 'Instrument Sans', sans-serif;
+}
+
+
+/* Header */
+.topbar {
+  background-color: var(--deep-green);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.brand {
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-size: 1.3rem;
+}
+
+.menu-icon,
+.icon-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.language-select {
+  background: var(--deep-green);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Featured Section */
+.featured {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: var(--bg-dark);
+}
+
+.featured h2 {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.featured-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.featured-icons img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+/* Footer */
+footer {
+  background-color: var(--black);
+  color: white;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-col h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  line-height: 1.8;
+}
+
+.subscribe input {
+  padding: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  border-radius: 3px;
+  border: none;
+}
+
+.subscribe-btn {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  background-color: var(--pink);
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+}
