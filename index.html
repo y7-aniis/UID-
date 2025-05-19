@@ -10,15 +10,24 @@
 <body>
   <header>
     <div class="topbar">
-      <button class="menu-icon">☰</button>
+      <button class="menu-icon">
+        <img src="icons/menu.svg"  class="nav-icon" />
+      </button>
+      <button class="nav-btn" aria-label="Search">
+        <img src="icons/search.svg" class="nav-icon" />
+      </button>
       <h1 class="brand">TIGER MIST</h1>
       <div class="topbar-right">
         <select class="language-select">
           <option>English</option>
           <option>中文</option>
         </select>
-        <button class="icon-btn">🛍️</button>
-        <button class="icon-btn">👤</button>
+        <button class="nav-btn" aria-label="Cart">
+          <img src="icons/cart.svg" class="nav-icon" />
+        </button>
+        <button class="nav-btn" aria-label="Account">
+          <img src="icons/account.svg" class="nav-icon" />
+        </button>
       </div>
     </div>
   </header>
@@ -26,10 +35,10 @@
   <main>
     <section class="hero-section">
       <div class="hero-image left">
-        <img src="hero1.jpg" alt="Left Hero Image">
+        <img src="assets/Hero1.jpg" alt="Left Hero Image">
       </div>
       <div class="hero-image right">
-        <img src="hero2.jpg" alt="Right Hero Image">
+        <img src="assets/Hero2.jpg" alt="Right Hero Image">
       </div>
     </section>
 
@@ -74,9 +83,17 @@
         <button class="subscribe-btn">SIGN UP</button>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="socials">FOLLOW US: 📸 🎵 📘</div>
-      <div class="region">Rest of World | $AUD</div>
+    <div class="social-bar">
+      <span class="follow-label">FOLLOW US</span>
+      <div class="social-icons">
+        <img src="social-icons/instagram.svg" />
+        <img src="social-icons/tiktok.svg" />
+        <img src="social-icons/facebook.svg" />
+      </div>
+    </div>
+    <div class="region-bar">
+      <img src="social-icons/globe.svg" alt="Globe" class="globe-icon" />
+      <span>Rest of World | $AUD</span>
     </div>
   </footer>
 

@@ -10,7 +10,7 @@
 
 body {
   margin: 0;
-  background-color: var(--bg-dark);
+  background-color: var(--deep-green);
   color: white;
 }
 /* Font */
@@ -44,6 +44,16 @@ body, p, h1, h2, h3, nav, footer {
   color: white;
   font-size: 1.2rem;
   cursor: pointer;
+}
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .language-select {
@@ -152,4 +162,50 @@ footer {
   border-top: 1px solid #444;
   padding-top: 1rem;
   font-size: 0.8rem;
+}
+.social-bar {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.social-icon {
+  width: 28px;
+  height: 28px;
+  color: #e66db3;
+  transition: color 0.3s ease;
+}
+
+.icon-btn:hover .social-icon,
+.social-icon:hover {
+  color: black;
+}
+
+/* Region Bar */
+.region-bar {
+  background-color: var(--deep-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 0;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.globe-icon {
+  width: 26px;
+  height: 26px;
+  color: #ccc;
 }
