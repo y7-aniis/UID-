@@ -194,22 +194,27 @@
       line-height: 1.8;
     }
 
+    .subscribe-row {
+      display: flex;
+      margin-top: 0.5rem;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
     .subscribe input {
       padding: 0.5rem;
-      width: 100%;
-      margin-top: 0.5rem;
-      border-radius: 3px;
       border: none;
+      flex: 1;
+      background-color: var(--grey);
     }
 
     .subscribe-btn {
-      margin-top: 0.5rem;
-      padding: 0.5rem;
-      width: 100%;
+      padding:  0.5rem 1rem;
       background-color: var(--pink);
       color: black;
       border: none;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .footer-bottom {
