@@ -6,115 +6,154 @@
     <title>TIGER MIST</title>
     <link rel="stylesheet" href="style.css" />
     <style>
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 20px;
+        gap: 5px; 
+      }
+
+      .product-card {
+        background: var(--white);
+        color: var(--deep-green);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; 
+      }
+
+
+      .product-card .info {
+        padding: 8px 0 0 0; 
+        font-size: 12px;
+        color: white;
+        text-align: left;
+      }
+
+      .product-card .name {
+        font-weight: lighter;
+        font-size: small;
+        display: block;
+        margin-left: 0; 
+        padding-left: 0;
+      }
+
+      .product-card .price {
+        font-weight: bold;
+        font-size: small;
+        display: block;
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      .heart {
+        width: 20px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding-top: 133%; 
+      }
+
+      .image-wrapper img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 2px; 
+        transition: opacity 0.3s ease-in-out;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .image-wrapper .main-img {
+        z-index: 1;
+        opacity: 1;
+      }
+
+      .image-wrapper .hover-img {
+        z-index: 2;
+        opacity: 0;
+      }
+
+      .image-wrapper:hover .hover-img {
+        opacity: 1;
+      }
+
+      .image-wrapper:hover .main-img {
+        opacity: 0;
+      }
+      @media (max-width: 768px) {
         .product-list {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            padding: 20px;
-            gap: 5px; 
+          grid-template-columns: repeat(2, 1fr);
         }
-
-        .product-card {
-            background: var(--white);
-            color: var(--deep-green);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden; 
-        }
+      }
 
 
-        .product-card .info {
-            padding: 8px 0 0 0; 
-            font-size: 12px;
-            color: white;
-            text-align: left;
-        }
-
-        .product-card .name {
-            font-weight: lighter;
-            font-size: small;
-            display: block;
-            margin-left: 0; 
-            padding-left: 0;
-        }
-
-        .product-card .price {
-            font-weight: bold;
-            font-size: small;
-            display: block;
-            margin-left: 0;
-            padding-left: 0;
-        }
-
-        .heart {
-          width: 20px;
-          position: absolute;
-          top: 10px;
-          right: 10px;
-        }
-
-        .image-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            padding-top: 133%; 
-        }
-
-        .image-wrapper img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 2px; 
-            transition: opacity 0.3s ease-in-out;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .image-wrapper .main-img {
-            z-index: 1;
-            opacity: 1;
-          }
-
-        .image-wrapper .hover-img {
-            z-index: 2;
-            opacity: 0;
-        }
-
-        .image-wrapper:hover .hover-img {
-            opacity: 1;
-        }
-
-        .image-wrapper:hover .main-img {
-            opacity: 0;
-        }
-
-
-  </style>
+  </style> 
 </head>
 <body>
   <header>
     <div class="topbar">
-      <button class="menu-icon">
-        <img src="icons/menu.svg"  class="nav-icon" />
-      </button>
-      <button class="nav-btn" aria-label="Search">
-        <img src="icons/search.svg" class="nav-icon" />
-      </button>
+      <div class="topbar-left">
+        <button class="menu-icon">
+          <img src="icons/menu.svg" class="nav-icon" />
+        </button>
+        <button class="nav-btn search-toggle" aria-label="Search">
+          <img src="icons/search.svg" class="nav-icon" />
+        </button>
+      </div>
+    
       <h1 class="brand">TIGER MIST</h1>
+    
       <div class="topbar-right">
         <select class="language-select">
           <option>English</option>
           <option>中文</option>
         </select>
         <button class="nav-btn" aria-label="Cart">
-          <img src="icons/cart.svg" class="nav-icon" />
+          <img src="icons/shopping_bag.svg" class="nav-icon" />
         </button>
         <button class="nav-btn" aria-label="Account">
           <img src="icons/account.svg" class="nav-icon" />
         </button>
       </div>
+
+      <div class="search-overlay hidden" id="searchOverlay">
+        <div class="search-panel">
+          <div class="search-input-group">
+            <img src="icons/search.svg" class="search-icon" id="searchIcon" />
+            <input
+              type="text"
+              class="search-input-box"
+              placeholder="Search...dress"
+              id="searchInputBox"
+            />
+          </div>
+          
+        </div>
+      </div>
     </div>
   </header>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-panel">
+      <button class="menu-close" id="menuClose">&times;</button>
+      <ul class="menu-list">
+        <li><a href="#">NEW RELEASES</a></li>
+        <li><a href="#">SHOP</a></li>
+        <li><a href="#">DRESSES</a></li>
+        <li><a href="#">MOST LOVED</a></li>
+        <li><a href="#">BACK IN STOCK</a></li>
+        <li><a href="#" class="sale">SALE</a></li>
+        <li><a href="#">WISHLIST♥</a></li>
+      </ul>
+    </div>
+  </div>
 
   <main class="product-list">
     
@@ -236,6 +275,7 @@
       </div>
       <div class="footer-col subscribe">
           <p>Sign up and get 15% off your first purchase!</p>
+          
           <div class="subscribe-row">
               <input type="email" placeholder="Enter your email address" />
               <button class="subscribe-btn">SIGN UP</button>
@@ -246,15 +286,16 @@
     <div class="social-bar">
       <span class="follow-label">FOLLOW US</span>
       <div class="social-icons">
-        <img src="social-icons/instagram.svg" />
-        <img src="social-icons/tiktok.svg" />
-        <img src="social-icons/facebook.svg" />
+        <img src="social-icons/instagram.webp" />
+        <img src="social-icons/tiktok.webp" />
+        <img src="social-icons/facebook.webp" />
       </div>
     </div>
     <div class="region-bar">
       <img src="social-icons/globe.svg" alt="Globe" class="globe-icon" />
       <span>Rest of World | $AUD</span>
     </div>
+    <div id="subscribe-message" class="subscribe-message hidden"></div>
   </footer>
 
   <script src="script.js"></script>
