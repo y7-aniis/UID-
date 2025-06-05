@@ -1,101 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TIGER MIST</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIGER MIST</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .hidden {
+      display: none !important;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 20px;
+      gap: 5px;
+    }
+
+    .product-card {
+      background: var(--white);
+      color: var(--deep-green);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+
+    .product-card .info {
+      padding: 8px 0 0 0;
+      font-size: 12px;
+      color: white;
+      text-align: left;
+    }
+
+    .product-card .name {
+      font-weight: lighter;
+      font-size: small;
+      display: block;
+      margin-left: 0;
+      padding-left: 0;
+      color: white;
+    }
+
+    .product-card .price {
+      font-weight: bold;
+      font-size: medium;
+      display: block;
+      margin-left: 0;
+      padding-left: 0;
+      color: lightgray;
+    }
+
+    .heart {
+      width: 20px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding-top: 133%;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 2px;
+      transition: opacity 0.3s ease-in-out;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .image-wrapper .main-img {
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .image-wrapper .hover-img {
+      z-index: 2;
+      opacity: 0;
+    }
+
+    .image-wrapper:hover .hover-img {
+      opacity: 1;
+    }
+
+    .image-wrapper:hover .main-img {
+      opacity: 0;
+    }
+
+    @media (max-width: 768px) {
       .product-list {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        padding: 20px;
-        gap: 5px; 
+        grid-template-columns: repeat(2, 1fr);
       }
-
-      .product-card {
-        background: var(--white);
-        color: var(--deep-green);
-        display: flex;
-        flex-direction: column;
-        overflow: hidden; 
-      }
-
-
-      .product-card .info {
-        padding: 8px 0 0 0; 
-        font-size: 12px;
-        color: white;
-        text-align: left;
-      }
-
-      .product-card .name {
-        font-weight: lighter;
-        font-size: small;
-        display: block;
-        margin-left: 0; 
-        padding-left: 0;
-      }
-
-      .product-card .price {
-        font-weight: bold;
-        font-size: small;
-        display: block;
-        margin-left: 0;
-        padding-left: 0;
-      }
-
-      .heart {
-        width: 20px;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-      }
-
-      .image-wrapper {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        padding-top: 133%; 
-      }
-
-      .image-wrapper img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 2px; 
-        transition: opacity 0.3s ease-in-out;
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-
-      .image-wrapper .main-img {
-        z-index: 1;
-        opacity: 1;
-      }
-
-      .image-wrapper .hover-img {
-        z-index: 2;
-        opacity: 0;
-      }
-
-      .image-wrapper:hover .hover-img {
-        opacity: 1;
-      }
-
-      .image-wrapper:hover .main-img {
-        opacity: 0;
-      }
-      @media (max-width: 768px) {
-        .product-list {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-
-  </style> 
+    }
+  </style>
 </head>
+
 <body>
   <header>
     <div class="topbar">
@@ -107,9 +114,12 @@
           <img src="icons/search.svg" class="nav-icon" />
         </button>
       </div>
-    
-      <h1 class="brand">TIGER MIST</h1>
-    
+
+      <h1 class="brand">
+        <a href="index.html" style="text-decoration: none; color: inherit;">TIGER MIST</a>
+      </h1>
+
+
       <div class="topbar-right">
         <select class="language-select">
           <option>English</option>
@@ -125,19 +135,29 @@
 
       <div class="search-overlay hidden" id="searchOverlay">
         <div class="search-panel">
+          <button class="search-close" id="searchClose">&times;</button>
           <div class="search-input-group">
             <img src="icons/search.svg" class="search-icon" id="searchIcon" />
-            <input
-              type="text"
-              class="search-input-box"
-              placeholder="Search...dress"
-              id="searchInputBox"
-            />
+            <input type="text" class="search-input-box" placeholder="Search...dress" id="searchInputBox" />
           </div>
-          
         </div>
       </div>
-    </div>
+
+      <!-- Account Login Overlay -->
+      <div class="account-overlay hidden" id="accountOverlay">
+        <div class="account-panel">
+          <button class="account-close" id="accountClose">&times;</button>
+          <h2 class="login-title">Login</h2>
+          <label>Email</label>
+          <input type="email" placeholder="Email" />
+          <label>Password</label>
+          <input type="password" placeholder="Password" />
+          <a href="#" class="link-muted">Forgot your password?</a>
+          <button class="login-btn">Sign In</button>
+          <a href="#" class="link-muted">Create account</a>
+
+        </div>
+      </div>
   </header>
 
   <div class="menu-overlay" id="menuOverlay">
@@ -156,99 +176,99 @@
   </div>
 
   <main class="product-list">
-    
+
+    <a href="product.html" class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/octivia_dress.webp" alt="OCTIVIA DRESS" />
+        <img class="hover-img" src="assets/octivia1.jpg" alt="OCTIVIA1" />
+      </div>
+      <div class="info">
+        <span class="name">OCTIVIA DRESS</span><br />
+        <span class="price">$30</span>
+      </div>
+    </a>
+
+
+
+    <a href="product2.html" class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/indigo_minidress.webp" alt="INDIGO MINI DRESS">
+        <img class="hover-img" src="assets/indigo1.jpg" alt="INDIGO1">
+      </div>
+      <div class="info">
+        <span class="name">INDIGO MINI DRESS</span><br>
+        <span class="price">$59.50</span>
+      </div>
+    </a>
+
     <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/octivia_dress.webp" alt="OCTIVIA DRESS">
-            <img class="hover-img" src="assets/octivia1.jpg" alt="OCTIVIA1">
-        </div>
-        <div class="info">
-            <span class="name">OCTIVA DRESS</span><br>
-            <span class="price">$30</span> 
-        </div>
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/faelina_minidress.webp" alt="FAELINA_MINIDRESS">
+        <img class="hover-img" src="assets/faelina1.jpg" alt="FAELINA1">
+      </div>
+      <div class="info">
+        <span class="name">FAELINA MINI DRESS</span><br>
+        <span class="price">$59.50</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/lavelle maxidress .webp" alt="LAVELLE_MAXIDRESS">
+        <img class="hover-img" src="assets/lavelle1.jpg" alt="LAVELLE1">
+      </div>
+      <div class="info">
+        <span class="name">LAVELLE MAX DRESS</span><br>
+        <span class="price">$76.30</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/nyomi_maxidress.webp" alt="NYOMI_MAXIDRESS">
+        <img class="hover-img" src="assets/nyomi1.jpg" alt="NYOMI1">
+      </div>
+      <div class="info">
+        <span class="name">NYOMI MAXI DRESS</span><br>
+        <span class="price">$76.30</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/anabelle_minidress.webp" alt="ANABELLE_MINIDRESS">
+        <img class="hover-img" src="assets/anabelle1.webp" alt="ANABELLE_MINIDRESS">
+      </div>
+      <div class="info">
+        <span class="name">ANABELLE MINI DRESS</span><br>
+        <span class="price">$55.30</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/theo_maxidress.webp" alt="THEO_MAXIDRESS">
+        <img class="hover-img" src="assets/theo1.jpg" alt="THEO1">
+      </div>
+      <div class="info">
+        <span class="name">THEO MAXI DRESS</span><br>
+        <span class="price">$76.30</span>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="image-wrapper">
+        <img class="main-img" src="assets/deja_dress.webp" alt="DEJA_DRESS">
+        <img class="hover-img" src="assets/deja1.jpg" alt="DEJA1">
+      </div>
+      <div class="info">
+        <span class="name">DEJA DRESS</span><br>
+        <span class="price">$66.50</span>
+      </div>
     </div>
 
 
 
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/indigo_minidress.webp" alt="INDIGO MINI DRESS">
-            <img class="hover-img" src="assets/indigo1.jpg" alt="INDIGO1">
-        </div>
-        <div class="info">
-            <span class="name">INDIGO MINI DRESS</span><br>
-            <span class="price">$59.50</span> 
-        </div>
-    </div>
-     
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/faelina_minidress.webp" alt="FAELINA_MINIDRESS">
-            <img class="hover-img" src="assets/faelina1.jpg" alt="FAELINA1">
-        </div>
-        <div class="info">
-            <span class="name">FAELINA MINI DRESS</span><br>
-            <span class="price">$59.50</span> 
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/lavelle maxidress .webp" alt="LAVELLE_MAXIDRESS">
-            <img class="hover-img" src="assets/lavelle1.jpg" alt="LAVELLE1">
-        </div>
-        <div class="info">
-            <span class="name">LAVELLE MAX DRESS</span><br>
-            <span class="price">$76.30</span> 
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/nyomi_maxidress.webp" alt="NYOMI_MAXIDRESS">
-            <img class="hover-img" src="assets/nyomi1.jpg" alt="NYOMI1">
-        </div>
-        <div class="info">
-            <span class="name">NYOMI MAXI DRESS</span><br>
-            <span class="price">$76.30</span> 
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/anabelle_minidress.webp" alt="ANABELLE_MINIDRESS">
-            <img class="hover-img" src="assets/anabelle1.webp" alt="ANABELLE_MINIDRESS">
-        </div>
-        <div class="info">
-            <span class="name">ANABELLE MINI DRESS</span><br>
-            <span class="price">$55.30</span> 
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/theo_maxidress.webp" alt="THEO_MAXIDRESS">
-            <img class="hover-img" src="assets/theo1.jpg" alt="THEO1">
-        </div>
-        <div class="info">
-            <span class="name">THEO MAXI DRESS</span><br>
-            <span class="price">$76.30</span> 
-        </div>
-    </div>
-
-    <div class="product-card">
-        <div class="image-wrapper">
-            <img class="main-img" src="assets/deja_dress.webp" alt="DEJA_DRESS">
-            <img class="hover-img" src="assets/deja1.jpg" alt="DEJA1">
-        </div>
-        <div class="info">
-            <span class="name">DEJA DRESS</span><br>
-            <span class="price">$66.50</span> 
-        </div>
-    </div>
-    
-
-    
   </main>
 
   <footer>
@@ -274,15 +294,15 @@
         </ul>
       </div>
       <div class="footer-col subscribe">
-          <p>Sign up and get 15% off your first purchase!</p>
-          
-          <div class="subscribe-row">
-              <input type="email" placeholder="Enter your email address" />
-              <button class="subscribe-btn">SIGN UP</button>
-          </div>
+        <p>Sign up and get 15% off your first purchase!</p>
+
+        <div class="subscribe-row">
+          <input type="email" placeholder="Enter your email address" />
+          <button class="subscribe-btn">SIGN UP</button>
+        </div>
       </div>
     </div>
-    
+
     <div class="social-bar">
       <span class="follow-label">FOLLOW US</span>
       <div class="social-icons">
@@ -300,4 +320,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>

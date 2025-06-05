@@ -1,12 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TIGER MIST</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
+
 <body>
   <header>
     <div class="topbar">
@@ -18,9 +24,12 @@
           <img src="icons/search.svg" class="nav-icon" />
         </button>
       </div>
-    
-      <h1 class="brand">TIGER MIST</h1>
-    
+
+      <h1 class="brand">
+        <a href="index.html" style="text-decoration: none; color: inherit;">TIGER MIST</a>
+      </h1>
+
+
       <div class="topbar-right">
         <select class="language-select">
           <option>English</option>
@@ -36,21 +45,33 @@
 
       <div class="search-overlay hidden" id="searchOverlay">
         <div class="search-panel">
+          <button class="search-close" id="searchClose">&times;</button>
           <div class="search-input-group">
             <img src="icons/search.svg" class="search-icon" id="searchIcon" />
-            <input
-              type="text"
-              class="search-input-box"
-              placeholder="Search...dress"
-              id="searchInputBox"
-            />
+            <input type="text" class="search-input-box" placeholder="Search...dress" id="searchInputBox" />
           </div>
-          
         </div>
       </div>
-    </div>
+
+      <!-- Account Login Overlay -->
+      <div class="account-overlay hidden" id="accountOverlay">
+        <div class="account-panel">
+          <button class="account-close" id="accountClose">&times;</button>
+          <h2 class="login-title">Login</h2>
+          <label>Email</label>
+          <input type="email" placeholder="Email" />
+          <label>Password</label>
+          <input type="password" placeholder="Password" />
+          <a href="#" class="link-muted">Forgot your password?</a>
+          <button class="login-btn">Sign In</button>
+          <a href="#" class="link-muted">Create account</a>
+
+        </div>
+      </div>
+
+
   </header>
- 
+
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-panel">
       <button class="menu-close" id="menuClose">&times;</button>
@@ -65,21 +86,21 @@
       </ul>
     </div>
   </div>
-  
-  
+
+
 
 
   <main>
     <section class="hero-section">
       <div class="hero-image left active">
         <div class="hero-overlay">
-          <a href="your-link.html" class="hero-btn">SHOP NEW ARRIVALS</a>
+          <a href="#" class="hero-btn" onclick="alert('This section is under development')">SHOP NEW ARRIVALS</a>
         </div>
         <img src="assets/Hero1.jpg" alt="Left Hero Image">
       </div>
       <div class="hero-image right">
         <div class="hero-overlay">
-          <a href="your-link.html" class="hero-btn">SHOP MOST LOVED</a>
+          <a href="#" class="hero-btn" onclick="alert('This section is under development')">SHOP MOST LOVED</a>
         </div>
         <img src="assets/Hero2.jpg" alt="Right Hero Image">
       </div>
@@ -127,12 +148,13 @@
             <p>@sarah_leonardd</p>
           </div>
           <div class="featured-item">
-            <img src="assets/olivia.jpg"@oliviagrivas" />
+            <img src="assets/olivia.jpg" alt="@oliviagrivas" />
             <p>@oliviagrivas</p>
           </div>
-          
+
         </div>
         <button class="arrow right">&#10095;</button>
+      </div>
     </section>
   </main>
 
@@ -160,16 +182,16 @@
       </div>
 
       <div class="footer-col subscribe">
-          <p>Sign up and get 15% off your first purchase!</p>
-          
-          <div class="subscribe-row">
-              <input type="email" placeholder="Enter your email address" />
-              <button class="subscribe-btn">SIGN UP</button>
-          </div>
+        <p>Sign up and get 15% off your first purchase!</p>
+
+        <div class="subscribe-row">
+          <input type="email" placeholder="Enter your email address" />
+          <button class="subscribe-btn">SIGN UP</button>
+        </div>
       </div>
 
     </div>
-    
+
     <div class="social-bar">
       <span class="follow-label">FOLLOW US</span>
       <div class="social-icons">
@@ -185,6 +207,7 @@
     <div id="subscribe-message" class="subscribe-message hidden"></div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script1.js"></script>
 </body>
+
 </html>

@@ -1,265 +1,388 @@
+// All JS functionalities are wrapped in DOMContentLoaded to ensure elements exist before binding
 
-// Language Switcher (simulated)
-document.querySelector("select").addEventListener("change", function () {
-  alert("Language switching is currently under development.");
-});
-
-// Subscribe button with success message overlay
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ========== Menu Toggle ==========
+  const menuBtn = document.querySelector(".menu-icon");
+  const menuOverlay = document.querySelector(".menu-overlay");
+  const menuClose = document.querySelector(".menu-close");
+
+  if (menuBtn && menuOverlay && menuClose) {
+    menuBtn.addEventListener("click", () => {
+      menuOverlay.classList.add("active");
+    });
+    menuClose.addEventListener("click", () => {
+      menuOverlay.classList.remove("active");
+    });
+  }
+
+  // ========== Search Toggle ==========
+  const searchBtn = document.querySelector(".search-toggle");
+  const searchOverlay = document.querySelector(".search-overlay");
+  const searchClose = document.querySelector(".search-close");
+
+  if (searchBtn && searchOverlay && searchClose) {
+    searchBtn.addEventListener("click", () => {
+      searchOverlay.classList.remove("hidden");
+      searchOverlay.classList.add("active");
+    });
+    searchClose.addEventListener("click", () => {
+      searchOverlay.classList.remove("active");
+      searchOverlay.classList.add("hidden");
+    });
+  }
+
+  // ========== Language Alert ==========
+  const languageSelect = document.querySelector("select");
+  if (languageSelect) {
+    languageSelect.addEventListener("change", () => {
+      alert("Language switching is currently under development.");
+    });
+  }
+
+  // ========== Subscribe Alert ==========
   const emailInput = document.querySelector(".subscribe-row input[type='email']");
   const signUpBtn = document.querySelector(".subscribe-btn");
   const messageBox = document.getElementById("subscribe-message");
 
   function showMessage(text, isError = false) {
+    if (!messageBox) return;
     messageBox.textContent = text;
     messageBox.classList.remove("hidden");
     messageBox.classList.add("show");
 
-  if (isError) {
-    messageBox.classList.add("error");
-  } else {
-    messageBox.classList.remove("error");
-  }
+    if (isError) {
+      messageBox.classList.add("error");
+    } else {
+      messageBox.classList.remove("error");
+    }
 
-  setTimeout(() => {
-    messageBox.classList.remove("show");
     setTimeout(() => {
-      messageBox.classList.add("hidden");
-    }, 300);
-  }, 3000);
+      messageBox.classList.remove("show");
+      setTimeout(() => {
+        messageBox.classList.add("hidden");
+      }, 300);
+    }, 3000);
   }
 
-  signUpBtn.addEventListener("click", () => {
-    const email = emailInput.value.trim();
-    if (email === "") {
-      showMessage("Please enter your email address.", true);
-    } else {
-      showMessage("Sign up successful!");
-      emailInput.value = "";
-    }
-  });
-
-  // Cart icon simulation (optional if icon-btn used)
-  const cartIcon = document.querySelector('[aria-label="Cart"]');
-  if (cartIcon) {
-    cartIcon.addEventListener("click", () => {
-      alert("Cart function coming soon!");
-    });
-  }
-
-  // Hero image slideshow (mobile only)
-  if (window.innerWidth <= 768) {
-    const images = document.querySelectorAll('.hero-image');
-    let current = 0;
-
-    setInterval(() => {
-      images[current].classList.remove('active');
-      current = (current + 1) % images.length;
-      images[current].classList.add('active');
-    }, 2500);
-  }
-
-  // Menu overlay toggle
-  const menuIcon = document.querySelector(".menu-icon");
-  const menuOverlay = document.getElementById("menuOverlay");
-  const menuClose = document.getElementById("menuClose");
-
-  if (menuIcon && menuOverlay && menuClose) {
-    menuIcon.addEventListener("click", () => {
-      menuOverlay.classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
-
-    menuClose.addEventListener("click", () => {
-      menuOverlay.classList.remove("active");
-      document.body.style.overflow = "";
-    });
-  }
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const menuLinks = document.querySelectorAll(".menu-list a");
-
-  menuLinks.forEach(link => {
-    link.addEventListener("click", event => {
-      event.preventDefault(); // ⛔ 阻止跳转
-      alert("This feature is currently under development.");
-    });
-  });
-});
-
-
-//search function
-document.addEventListener("DOMContentLoaded", () => {
-  const searchToggle = document.querySelector(".search-toggle");
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchInputBox = document.getElementById("searchInputBox");
-  const searchIcon = document.getElementById("searchIcon");
-
-  if (searchToggle && searchOverlay && searchInputBox && searchIcon) {
-    // 点击 topbar 搜索图标，显示/隐藏 overlay
-    searchToggle.addEventListener("click", () => {
-      searchOverlay.classList.toggle("active");
-      searchOverlay.classList.remove("hidden");
-      if (searchOverlay.classList.contains("active")) {
-        searchInputBox.focus();
-      }
-    });
-
-    // 输入 + Enter
-    searchInputBox.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        performSearch();
-      }
-    });
-
-    // 点击放大镜图标
-    searchIcon.addEventListener("click", () => {
-      performSearch();
-    });
-
-    function performSearch() {
-      const query = searchInputBox.value.trim().toLowerCase();
-      if (query === "dress") {
-        window.location.href = "search.html";
+  if (signUpBtn && emailInput) {
+    signUpBtn.addEventListener("click", () => {
+      const email = emailInput.value.trim();
+      if (!email || !email.includes("@")) {
+        showMessage("Please enter a valid email address.", true);
       } else {
-        alert("No matching result.");
+        showMessage("Thanks for signing up!");
       }
-      }
-    } else {
-      console.error("Search elements not found in DOM.");
-    }
+    });
+  }
 
-    document.addEventListener("click", function (e) {
-      const searchOverlay = document.getElementById("searchOverlay");
-      const searchToggle = document.querySelector(".search-toggle");
-    
-      // 如果 overlay 当前是展开状态
-      if (searchOverlay.classList.contains("active")) {
-        // 如果点击目标不在 overlay 内，也不在按钮上
-        if (
-          !searchOverlay.contains(e.target) &&
-          !searchToggle.contains(e.target)
-        ) {
-          searchOverlay.classList.remove("active");
+  // ========== Hero Slideshow (mobile only) ==========
+  const leftHero = document.querySelector(".hero-image.left img");
+  const rightHero = document.querySelector(".hero-image.right img");
+  const heroImages = ["assets/Hero1.jpg", "assets/Hero2.jpg"];
+  let heroIndex = 0;
+
+  function rotateHeroImages() {
+    heroIndex = (heroIndex + 1) % heroImages.length;
+    if (leftHero) leftHero.src = heroImages[heroIndex];
+    if (rightHero) rightHero.src = heroImages[(heroIndex + 1) % heroImages.length];
+  }
+
+  if (window.innerWidth <= 768) {
+    setInterval(rotateHeroImages, 4000);
+  }
+
+  // ========== Wishlist Toggle ==========
+  const heartIcon = document.querySelector(".heart-icon img");
+  if (heartIcon) {
+    let isWished = false;
+    heartIcon.addEventListener("click", function () {
+      isWished = !isWished;
+      heartIcon.src = isWished
+        ? "icons/wishList_added.svg"
+        : "icons/ic_wishList.svg";
+    });
+  }
+
+  // ========== Color Switcher ==========
+  const imageMap = {
+    red: [
+      "assets/octivia_dress.webp",
+      "assets/OCTAVIA_front.webp",
+      "assets/OCTAVIA_back.webp"
+    ],
+    purple: [
+      "assets/OCTAVIADRESS-PURPLE1.webp",
+      "assets/OCTAVIADRESS-PURPLE2.webp",
+      "assets/OCTAVIADRESS-PURPLE3.webp"
+    ],
+    brown: [
+      "assets/OCTAVIAMINIDRESS-BROWN1.webp",
+      "assets/OCTAVIAMINIDRESS-BROWN2.webp",
+      "assets/OCTAVIAMINIDRESS-BROWN4.webp"
+    ]
+  };
+
+  const displayNameMap = {
+    red: "Cherry Red",
+    purple: "Purple",
+    brown: "Brown"
+  };
+
+  const colorOptions = document.querySelectorAll(".color-option");
+  const productImages = document.querySelectorAll(".product-images img");
+  const selectedColorName = document.getElementById("selected-color-name");
+
+  colorOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      colorOptions.forEach(o => o.classList.remove("active-color"));
+      option.classList.add("active-color");
+
+      const color = option.dataset.color;
+      const imgs = imageMap[color];
+
+      productImages.forEach((img, idx) => {
+        if (imgs[idx]) img.src = imgs[idx];
+      });
+
+      if (selectedColorName) {
+        selectedColorName.textContent = displayNameMap[color];
+      }
+    });
+  });
+
+  // ========== Size Selector ==========
+  const sizeButtons = document.querySelectorAll(".size-btn");
+  const selectedSizeLabel = document.getElementById("selected-size");
+
+  sizeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      sizeButtons.forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+      const selectedSize = button.textContent;
+      if (selectedSizeLabel) {
+        selectedSizeLabel.textContent = selectedSize;
+      }
+    });
+  });
+
+  // ========== Reviews Swipe (Mobile) ==========
+  const reviewGrid = document.querySelector(".reviews-grid");
+  if (reviewGrid && window.innerWidth < 768) {
+    reviewGrid.style.display = "flex";
+    reviewGrid.style.overflowX = "auto";
+    reviewGrid.style.gap = "1rem";
+  }
+
+  // ========== Featured Carousel Auto Scroll ==========
+  const featured = document.querySelector(".featured-container");
+  if (featured) {
+    setInterval(() => {
+      featured.scrollLeft += 1;
+      if (featured.scrollLeft >= featured.scrollWidth - featured.clientWidth) {
+        featured.scrollLeft = 0;
+      }
+    }, 400);
+  }
+  //========= Link index.html to search.html =========
+  const searchInputBox = document.getElementById("searchInputBox");
+
+  if (searchInputBox) {
+    searchInputBox.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        const query = searchInputBox.value.trim().toLowerCase();
+        if (query === "dress") {
+          window.location.href = "search.html";
         }
       }
     });
-});
-
-//product
-document.querySelector('.add-to-bag').addEventListener('click', function() {
-  const title = document.querySelector('.product-title').textContent;
-  const price = document.querySelector('.product-price').textContent;
-  const size = document.querySelector('.custom-select').value;
-  const image = document.querySelector('.product-images img')?.src;
-
-  if (size === 'Size') {
-    alert('Please select a size.');
-    return;
   }
 
-  const product = { title, price, size, image };
-  localStorage.setItem('cartItem', JSON.stringify(product));
+  // ========== Shopping Bag Logic ==========
+  let cart = [];
 
-  this.textContent = 'ADDED TO BAG ✓';
-  this.style.backgroundColor = '#28a745';
-  setTimeout(() => {
-    this.textContent = 'ADD TO BAG';
-    this.style.backgroundColor = '#8FBC8F';
-  }, 2000);
-
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  // 👜 打开购物袋
-  const cartIcon = document.querySelector('[aria-label="Cart"]');
-  const bagOverlay = document.getElementById("shoppingBagOverlay");
-  const bagCloseBtn = document.getElementById("bagOverlayClose");
-  const bagContent = document.querySelector(".shopping-bag-content");
-
-  if (cartIcon) {
-    cartIcon.addEventListener("click", () => {
-      openShoppingBagOverlay();
+  const addToCartBtn = document.getElementById('add-to-cart-btn');
+  if (addToCartBtn) {
+    addToCartBtn.addEventListener('click', function() {
+      const product = getCurrentProductSelection();
+      addToCart(product);
+      showCartOverlay();
     });
   }
 
-  if (bagCloseBtn) {
-    bagCloseBtn.addEventListener("click", () => {
-      bagOverlay.classList.remove("active");
-    });
+  function getCurrentProductSelection() {
+    const title = document.querySelector('.product-title')?.textContent || '';
+    const price = parseFloat(document.querySelector('.product-price')?.textContent.replace('$', '')) || 0;
+    const selectedSize = document.getElementById('selected-size')?.textContent || '';
+    const selectedColor = document.getElementById('selected-color-name')?.textContent || '';
+    const image = document.querySelector('.product-images img')?.src || '';
+  
+    return {
+      id: `${title}-${selectedSize}-${selectedColor}`,
+      title: title,
+      size: selectedSize,
+      color: selectedColor,
+      price: price,
+      image: image,
+      quantity: 1
+    };
   }
+  
 
-  // ✅ 显示购物车 overlay 内容
-  function openShoppingBagOverlay() {
-    const cartItem = JSON.parse(localStorage.getItem("cartItem"));
-    const overlay = document.getElementById("shoppingBagOverlay");
-    const container = document.querySelector(".shopping-bag-content");
+  function addToCart(product) {
+    const existingItemIndex = cart.findIndex(item => item.id === product.id);
 
-    if (!container) return;
-
-    if (cartItem) {
-      container.innerHTML = `
-        <div class="shopping-bag-item">
-          <img src="${cartItem.image}" alt="${cartItem.title}">
-          <div class="shopping-bag-details">
-            <p>${cartItem.title}</p>
-            <p>${cartItem.price}</p>
-            <p>Size: ${cartItem.size}</p>
-            <div class="qty-selector">
-              <button>-</button>
-              <span>1</span>
-              <button>+</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="shopping-bag-perks">
-          <button>👗 Pay For It Later<br><small>Wear it now</small></button>
-          <button>📦 Free Shipping<br><small>Over $75</small></button>
-          <button>↩️ Free Returns*<br><small>Fast & Easy</small></button>
-        </div>
-
-        <p style="font-size: 0.75rem; color: #555; margin-bottom: 1rem;">
-          Final taxes and Shipping Costs Calculated at Checkout
-        </p>
-
-        <div class="shopping-bag-summary">
-          <p>Total: <strong>${cartItem.price}</strong></p>
-          <button class="checkout-btn" id="checkoutBtn">CHECKOUT</button>
-        </div>
-      `;
+    if (existingItemIndex > -1) {
+      cart[existingItemIndex].quantity += 1;
     } else {
-      container.innerHTML = `<p>Your bag is empty.</p>`;
+      cart.push(product);
     }
 
-    overlay.classList.add("active");
+    updateCartDisplay();
+    updateCartTotal();
   }
 
-  // 🛍️ test.html 产品页按钮绑定（如果有）
-  const addToBagBtn = document.getElementById("addToBagBtn");
-  if (addToBagBtn) {
-    addToBagBtn.addEventListener("click", () => {
-      const sizeSelect = document.getElementById("sizeSelect");
-      const selectedSize = sizeSelect.value;
-      const productTitle = document.querySelector(".product-title")?.textContent;
-      const productPrice = document.querySelector(".product-price")?.textContent;
-      const productImage = document.querySelector(".main-product-image")?.getAttribute("src");
+  window.removeFromCart = function(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    updateCartDisplay();
+    updateCartTotal();
+  };
 
-      if (selectedSize === "Select Size") {
-        alert("Please select a size.");
-        return;
+  window.updateCartQuantity = function(productId, newQuantity) {
+    const itemIndex = cart.findIndex(item => item.id === productId);
+    if (itemIndex > -1) {
+      if (newQuantity <= 0) {
+        removeFromCart(productId);
+      } else {
+        cart[itemIndex].quantity = parseInt(newQuantity);
+        updateCartDisplay();
+        updateCartTotal();
       }
+    }
+  };
 
-      const product = {
-        title: productTitle,
-        price: productPrice,
-        size: selectedSize,
-        image: productImage,
-      };
-
-      localStorage.setItem("cartItem", JSON.stringify(product));
-      alert("Added to bag!");
+  function updateCartDisplay() {
+    const cartItemsContainer = document.querySelector('.cart-items');
+    if (!cartItemsContainer) return;
+  
+    cartItemsContainer.innerHTML = '';
+  
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p>Your cart is empty</p>';
+      return;
+    }
+  
+    cart.forEach(item => {
+      const cartItemHTML = `
+        <div class="cart-item" data-id="${item.id}">
+          <div class="item-img">
+            <img src="${item.image}" alt="${item.title}" />
+          </div>
+          <div class="item-info">
+            <div class="item-name">${item.title}</div>
+            <div class="item-options">Size: ${item.size} | Colour: ${item.color}</div>
+            <div class="item-price">$${item.price.toFixed(2)}</div>
+          </div>
+          <div class="item-controls">
+            <input type="number" min="1" value="${item.quantity}" 
+                   onchange="updateCartQuantity('${item.id}', this.value)">
+            <button onclick="removeFromCart('${item.id}')" class="remove-btn">×</button>
+          </div>
+        </div>
+      `;
+      cartItemsContainer.innerHTML += cartItemHTML;
     });
   }
+  
+  
+
+  function updateCartTotal() {
+    const cartTotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const totalElement = document.getElementById('total-price');
+    if (totalElement) {
+      totalElement.textContent = cartTotal.toFixed(2);
+    }
+  }
+
+  function showCartOverlay() {
+    const cartOverlay = document.getElementById('cart-overlay');
+    if (cartOverlay) {
+      cartOverlay.classList.remove('hidden');
+      cartOverlay.classList.add('show');
+    }
+  }
+
+  function hideCartOverlay() {
+    const cartOverlay = document.getElementById('cart-overlay');
+    if (cartOverlay) {
+      cartOverlay.classList.add('hidden');
+      cartOverlay.classList.remove('show');
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    const cartOverlay = document.getElementById('cart-overlay');
+    const addToCartBtn = document.getElementById('add-to-cart-btn');
+
+    if (cartOverlay && !cartOverlay.contains(e.target) && e.target !== addToCartBtn) {
+      hideCartOverlay();
+    }
+  });
+
+  // ========== Accordion Functionality ==========
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+      const accordionItem = this.parentElement;
+      const content = accordionItem.querySelector('.accordion-content');
+
+      accordionItem.classList.toggle('active');
+
+      if (accordionItem.classList.contains('active')) {
+        content.style.display = 'block';
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        content.style.display = 'none';
+        content.style.maxHeight = '0px';
+      }
+    });
+  });
+  //=========Account login
+  const accountBtn = document.querySelector('button[aria-label="Account"]');
+  const accountOverlay = document.getElementById("accountOverlay");
+  const accountClose = document.getElementById("accountClose");
+
+  if (accountBtn && accountOverlay && accountClose) {
+    accountBtn.addEventListener("click", (e) => {
+      e.stopPropagation(); // 防止点到按钮也触发 document 的关闭逻辑
+      accountOverlay.classList.remove("hidden");
+    });
+
+    accountClose.addEventListener("click", (e) => {
+      e.stopPropagation(); // 防止冒泡误触
+      accountOverlay.classList.add("hidden");
+    });
+
+  // 阻止内部点击冒泡
+    const panel = accountOverlay.querySelector(".account-panel");
+    if (panel) {
+      panel.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    }
+
+  // 点外部关闭浮窗
+    document.addEventListener("click", function (e) {
+      const isInsidePanel = e.target.closest("#accountOverlay .account-panel");
+      const isAccountIcon = e.target.closest('button[aria-label="Account"]');
+      if (!isInsidePanel && !isAccountIcon) {
+        accountOverlay.classList.add("hidden");
+      }
+    });
+  }
+  
+
 });
+
+
