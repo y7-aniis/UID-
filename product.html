@@ -12,6 +12,9 @@
         .hidden {
             display: none !important;
         }
+        .back-icon{
+            background-color:#0d2f30;
+        }
     </style>
 </head>
 
@@ -19,8 +22,8 @@
     <header>
         <div class="topbar">
             <div class="topbar-left">
-                <button class="menu-icon">
-                    <img class="nav-icon" src="icons/menu.svg" />
+                <button class="back-icon" onclick="history.back()">
+                    <img class="nav-icon" src="icons/left-arrow.svg" />
                 </button>
                 <button aria-label="Search" class="nav-btn search-toggle">
                     <img class="nav-icon" src="icons/search.svg" />
@@ -72,20 +75,6 @@
     </header>
     <!-- MODULE 1 -->
 
-    <div class="menu-overlay" id="menuOverlay">
-        <div class="menu-panel">
-            <button class="menu-close" id="menuClose">&times;</button>
-            <ul class="menu-list">
-                <li><a href="#">NEW RELEASES</a></li>
-                <li><a href="#">SHOP</a></li>
-                <li><a href="#">DRESSES</a></li>
-                <li><a href="#">MOST LOVED</a></li>
-                <li><a href="#">BACK IN STOCK</a></li>
-                <li><a href="#" class="sale">SALE</a></li>
-                <li><a href="#">WISHLIST♥</a></li>
-            </ul>
-        </div>
-    </div>
 
     <div class="container">
         <div class="product-two-col">
