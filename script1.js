@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.querySelector(".featured-container");
         if (!container) return;
 
-        // 克隆内容实现无缝滚动
+        
         container.innerHTML += container.innerHTML;
 
         let scrollSpeed = 0.5;
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         function loopScroll() {
             container.scrollLeft += scrollSpeed;
 
-            // 如果滚动超过原始内容一半（即第一次内容末尾），就回到起点
+            
             if (container.scrollLeft >= container.scrollWidth / 2) {
                 container.scrollLeft = 0;
             }
@@ -353,6 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             cartItem.querySelector('.remove-btn').addEventListener('click', () => {
                 cart = cart.filter(i => i.id !== item.id);
+                saveCart();
                 updateCartDisplay();
                 updateCartTotal();
             });
@@ -362,9 +363,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 const newQty = parseInt(e.target.value);
                 if (newQty > 0) {
                     item.quantity = newQty;
+                    saveCart();
                     updateCartTotal();
                 } else {
                     cart = cart.filter(i => i.id !== item.id);
+                    saveCart();
                     updateCartDisplay();
                     updateCartTotal();
                 }
@@ -468,6 +471,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("checkout-items");
         const subtotalEl = document.getElementById("checkout-subtotal");
         const totalEl = document.getElementById("checkout-total");
+        console.log(">> renderCheckoutItems has been called");
+
 
         if (!container || !subtotalEl || !totalEl) return;
 
