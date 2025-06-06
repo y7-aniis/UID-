@@ -49,45 +49,66 @@
                 <div class="divider"><span>OR</span></div>
             </div>
 
-            <div class="contact-section">
-                <h3>Contact</h3>
-                <input type="email" placeholder="Email" />
-                <label><input type="checkbox" checked /> Email me with news and offers</label>
-            </div>
+            <form id="checkout-form">
+                <div id="form-error" class="error-box hidden" style="color: red; margin-bottom: 1rem;"></div>
 
-            <div class="delivery-section">
-                <h3>Delivery</h3>
-                <select>
-                    <option>Australia</option>
-                </select>
-                <div class="input-row">
-                    <input type="text" placeholder="First name" required />
-                    <input type="text" placeholder="Last name" required />
+                <div class="contact-section">
+                  <h3>Contact</h3>
+                  <input type="email" id="email" name="email" placeholder="Email" required />
+                  <label>
+                    <input type="checkbox" name="subscribe" checked />
+                    Email me with news and offers
+                  </label>
                 </div>
-                <input type="text" placeholder="Company (optional)" />
-                <input type="text" placeholder="Address" required />
-                <input type="text" placeholder="Apartment, suite, etc. (optional)" />
-                <div class="input-row">
-                    <input type="text" placeholder="State/territory" required />
-                    <input type="text" placeholder="Postcode" required />
+              
+                <div class="delivery-section">
+                  <h3>Delivery</h3>
+                  <select name="country" required>
+                    <option value="Australia">Australia</option>
+                  </select>
+              
+                  <div class="input-row">
+                    <input type="text" id="first-name" name="firstName" placeholder="First name" required />
+                    <input type="text" id="last-name" name="lastName" placeholder="Last name" required />
+                  </div>
+              
+                  <input type="text" id="company" name="company" placeholder="Company (optional)" />
+                  <input type="text" id="address" name="address" placeholder="Address" required />
+                  <input type="text" id="apartment" name="apartment" placeholder="Apartment, suite, etc. (optional)" />
+              
+                  <div class="input-row">
+                    <input type="text" id="state" name="state" placeholder="State/territory" required />
+                    <input type="text" id="postcode" name="postcode" placeholder="Postcode: xxxx" required />
+                  </div>
                 </div>
-            </div>
-
-            <div class="payment-section">
-                <h3>Payment</h3>
-                <label><input type="radio" name="payment" checked /> Credit card</label>
-                <input type="text" placeholder="Card number" required />
-                <input type="text" placeholder="Expiration date (MM / YY)" required />
-                <input type="text" placeholder="Security code" required />
-                <input type="text" placeholder="Name on card" required />
-                <label><input type="checkbox" checked /> Use shipping address as billing address</label>
-
-                <label><input type="radio" name="payment" /> PayPal</label>
-                <h4>Remember me</h4>
-                <label><input type="checkbox" checked /> Save info for faster checkout</label>
-                <input type="text" placeholder="Mobile phone number" required />
-                <button class="chkout-btn pay-now">Pay now</button>
-            </div>
+              
+                <div class="payment-section">
+                  <h3>Payment</h3>
+                  <label><input type="radio" name="paymentMethod" value="card" checked /> Credit card</label>
+              
+                  <input type="text" id="card-number" name="cardNumber" placeholder="Card number: xxxxxxxxxxxxxxxx" required />
+                  <input type="text" id="expiry" name="expiry" placeholder="Expiration date (MM / YY)" required />
+                  <input type="text" id="security-code" name="securityCode" placeholder="Security code" required />
+                  <input type="text" id="card-name" name="cardName" placeholder="Name on card" required />
+              
+                  <label>
+                    <input type="checkbox" name="useAsBilling" checked />
+                    Use shipping address as billing address
+                  </label>
+              
+                  <label><input type="radio" name="paymentMethod" value="paypal" /> PayPal</label>
+              
+                  <h4>Remember me</h4>
+                  <label><input type="checkbox" name="remember" checked /> Save info for faster checkout</label>
+                  <input type="text" id="phone" name="phone" placeholder="Mobile phone number" required />
+              
+                  
+                
+              
+                  <button class="chkout-btn pay-now" type="submit">Pay now</button>
+                </div>
+            </form>
+              
         </section>
 
         <!-- RIGHT SECTION -->
@@ -112,9 +133,7 @@
 
     </main>
     <script src="script1.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", renderCheckoutItems);
-    </script>
+    
 
 
 </body>

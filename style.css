@@ -381,10 +381,15 @@ body {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  scrollbar-width: none;
   padding: 10px;
   max-width: 100%;
 }
+.featured-container::-webkit-scrollbar {
+  display: none; 
+}
+
 
 .featured-item {
   flex: 0 0 auto;
